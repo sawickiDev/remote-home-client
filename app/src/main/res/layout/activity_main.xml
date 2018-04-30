@@ -12,35 +12,74 @@
         android:id="@+id/parentLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#ffff00">
-
-        <ImageView
-            android:id="@+id/connectionStatusImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bluetooth_connect_36_ko"/>
-
-        <EditText
-            android:id="@+id/messageEditText"
+        android:orientation="vertical">
+        
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/appToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:hint="message" />
+            android:minHeight="?attr/actionBarSize"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/vec_remote_home_small"
+            app:title="Remote Home"
+            android:background="@color/colorPrimary" />
 
-        <Button
-            android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SEND"
-            android:textSize="12sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/discoverProgressBar"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            <ImageView
+                android:id="@+id/connectionStatusActiveImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="end"
+                android:visibility="gone"
+                android:src="@drawable/vec_bluetooth_active_small"/>
+
+            <ImageView
+                android:id="@+id/connectionStatusInactiveImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="end"
+                android:visibility="visible"
+                android:src="@drawable/vec_bluetooth_inactive_small"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coffee Wake-Up"
+                    android:layout_gravity="center"
+                    android:textAppearance="?android:textAppearanceSmall"/>
+
+                <ImageButton
+                    android:id="@+id/wakeupInfoImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/vec_info_small"/>
+
+                <Switch
+                    android:id="@+id/wakeupSwitch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="right"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

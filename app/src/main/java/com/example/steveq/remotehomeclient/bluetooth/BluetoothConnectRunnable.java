@@ -21,10 +21,12 @@ public class BluetoothConnectRunnable implements Runnable{
     private static final UUID MY_UUID = UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee");
     private boolean connected;
     private BluetoothConnectionRunnable bluetoothConnectionRunnable;
+    private Handler parentHandler;
 
-    public BluetoothConnectRunnable(BluetoothDevice device, BluetoothAdapter adapter) {
+    public BluetoothConnectRunnable(BluetoothDevice device, BluetoothAdapter adapter, Handler handler) {
         bluetoothAdapter = adapter;
         BluetoothSocket tmp = null;
+        this.parentHandler = handler;
         this.device = device;
 
         try {
@@ -58,7 +60,9 @@ public class BluetoothConnectRunnable implements Runnable{
         Handler handler = new Handler(looper) {
             @Override
             public void handleMessage(Message msg) {
-                Log.d(TAG, "MESSAGE FROM CONNECTION SERVICE :: " + msg.toString());
+                Message msgParent = parentHandler.obtainMessage();
+                msgParent.arg1 = msg.arg1;
+                parentHandler.sendMessage(msgParent);
             }
         };
         bluetoothConnectionRunnable =

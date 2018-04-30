@@ -34,20 +34,25 @@ public class BluetoothConnectionRunnable implements Runnable {
         this.handler = handler;
         InputStream tmpIn = null;
         OutputStream tmpOut = null;
+        Message msg = handler.obtainMessage();
 
         try {
             tmpIn = socket.getInputStream();
         } catch (IOException e) {
+            msg.arg1 = 0;
             Log.e(TAG, "Error occurred when creating input stream", e);
         }
         try {
             tmpOut = socket.getOutputStream();
         } catch (IOException e) {
+            msg.arg1 = 0;
             Log.e(TAG, "Error occurred when creating output stream", e);
         }
 
         this.inputStream = tmpIn;
         this.outputStream = tmpOut;
+        msg.arg1 = 1;
+        handler.sendMessage(msg);
     }
 
     public void run() {
